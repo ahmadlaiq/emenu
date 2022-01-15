@@ -27,19 +27,22 @@ Route::get('/logout', 'App\Http\Controllers\AuthController@logout');
 
 Route::group(['middleware' => ['cek-login:0']], function () {
 //Dashboard
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
+Route::get('/dashboard', 'App\Http\Controllers\MenuController@countMenu');
 //Ketegori
 Route::get('/data-kategori', 'App\Http\Controllers\KategoriController@read');
 Route::get('/tambah-data-kategori', function () {
     return view('admin.tambah-data-kategori');
 });
 Route::post('/tambah-kategori', 'App\Http\Controllers\KategoriController@create');
+Route::delete('/delete-kategori{id}', 'App\Http\Controllers\KategoriController@delete')->name('delete-kategori');
+Route::get('/halaman-update-kategori/{id}', 'App\Http\Controllers\KategoriController@halamanupdate')->name('halaman-update-kategori');
+Route::put('/update/{Kategori}', 'App\Http\Controllers\KategoriController@update')->name('update');
 //Menu
 Route::post('/tambah-menu', 'App\Http\Controllers\MenuController@create')->name('tambahdatamenu');
 Route::get('/data-menu', 'App\Http\Controllers\MenuController@read');
 Route::get('/tambah-data-menu', 'App\Http\Controllers\MenuController@readKategori');
+Route::delete('/delete-menu{id}', 'App\Http\Controllers\MenuController@delete')->name('delete-menu');
+Route::get('/halaman-update-menu/{id}', 'App\Http\Controllers\MenuController@halamanupdate')->name('halaman-update-menu');
 //Pesanan
 Route::get('/pesanan-masuk', function () {
     return view('admin.pesanan-masuk');

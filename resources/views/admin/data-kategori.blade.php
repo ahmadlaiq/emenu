@@ -33,10 +33,16 @@
               <td>{{ $no++  }}</td>
               <td>{{ $data->nama }}</td>
               <td>
-                <a href="#" class="btn btn-success btn-sm">Edit</a>
-                <a href="#" class="btn btn-danger btn-sm">Hapus</a>
+                <a class="btn btn-success btn-sm" href="{{ route('halaman-update-kategori', $data->id)}}">Edit</a>
+                <a href="#" data-id="{{ $data->id }}" class="btn btn-danger btn-sm swal-confirm">
+                  <form action="{{ route('delete-kategori',$data->id)}}" id="delete{{ $data->id }}" method="POST">
+                      @csrf
+                      @method('delete')
+                  </form>
+                  Hapus</a>
               </td>
             </tr>
+            
             @endforeach
           </tbody></table>
         </div>
@@ -48,3 +54,33 @@
       </div>
   </section>
 @endsection
+
+@push('page-scripts')
+<script src="{{ asset('assets/modules/sweetalert/sweetalert.min.js')}}"></script>
+
+@endpush
+
+@push('after-scripts')
+<script>
+$(".swal-confirm").click(function(e) {
+    id = e.target.dataset.id;
+    swal({
+        title: 'Apakah anda yakin?',
+        text: 'Data yang dihapus tidak dapat dikembalikan!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+            swal('Data berhasil dihapus!', {
+            icon: 'success',
+            });
+        $(`#delete${id}`).submit();
+        } else {
+            swal('File anda aman!');
+        }
+      });
+  });
+</script>
+@endpush

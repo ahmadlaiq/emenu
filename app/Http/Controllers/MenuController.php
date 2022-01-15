@@ -6,6 +6,7 @@ use App\Models\Kategori;
 use App\Models\Menu;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class MenuController extends Controller
@@ -73,4 +74,21 @@ class MenuController extends Controller
         $menu = Menu::all();
         return view('customer.index', compact('menu'));
     }
+
+    public function delete($id){
+        DB::table('menus')->where('id', $id)->delete();
+        return redirect()->back();
+    }
+
+    public function halamanupdate($id){
+        $menu = Menu::where('id',$id)->first();
+        $kategori = Kategori::all();
+        return view('admin.edit-data-menu', compact('menu', 'kategori'));
+     }
+
+     public function countMenu() {
+        $countMenu = Menu::all()->count();
+        $countKagetori = Kategori::all()->count();
+        return view('admin.dashboard', compact('countMenu', 'countKagetori'));
+     }
 }
