@@ -15,7 +15,7 @@
               <h4>Pesanan Masuk</h4>
             </div>
             <div class="card-body">
-              10
+              {{ $countPesan1 }}
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
               <h4>Pesanan Selesai</h4>
             </div>
             <div class="card-body">
-              42
+              {{ $countPesan2 }}
             </div>
           </div>
         </div>

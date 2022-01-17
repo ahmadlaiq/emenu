@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kategori;
 use App\Models\Menu;
+use App\Models\Pesan;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,6 +90,8 @@ class MenuController extends Controller
      public function countMenu() {
         $countMenu = Menu::all()->count();
         $countKagetori = Kategori::all()->count();
-        return view('admin.dashboard', compact('countMenu', 'countKagetori'));
+        $countPesan1 = Pesan::all()->where('status','LIKE', 1)->count();
+        $countPesan2 = Pesan::all()->where('status','LIKE', 2)->count();
+        return view('admin.dashboard', compact('countMenu', 'countKagetori', 'countPesan1', 'countPesan2'));
      }
 }

@@ -22,7 +22,7 @@
           <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Pesanan</span></a>
           <ul class="dropdown-menu">
             <li><a class="nav-link" href="/pesanan-masuk">Pesanan Masuk</a></li>
-            <li><a class="nav-link" href="layout-transparent.html">Pesanan Selesai</a></li>
+            <li><a class="nav-link" href="/pesanan-selesai">Pesanan Selesai</a></li>
           </ul>
         </li>
         

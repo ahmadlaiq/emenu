@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\MenuController@readtoIndex');
-Route::get('/login', function () {
-    return view('customer.login');
-});
+Route::post('/tambah-pesan', 'App\Http\Controllers\PesanController@create')->name('tambahpesan');
 
 //Admin Login
 Route::get('/admin', function () {
@@ -44,7 +42,8 @@ Route::get('/tambah-data-menu', 'App\Http\Controllers\MenuController@readKategor
 Route::delete('/delete-menu{id}', 'App\Http\Controllers\MenuController@delete')->name('delete-menu');
 Route::get('/halaman-update-menu/{id}', 'App\Http\Controllers\MenuController@halamanupdate')->name('halaman-update-menu');
 //Pesanan
-Route::get('/pesanan-masuk', function () {
-    return view('admin.pesanan-masuk');
-});
+Route::get('/pesanan-masuk', 'App\Http\Controllers\PesanController@readMasuk');
+Route::get('/pesanan-selesai', 'App\Http\Controllers\PesanController@readSelesai');
+Route::put('/pesanan-selesai/{Pesan}', 'App\Http\Controllers\PesanController@selesai')->name('selesai');
+Route::delete('/delete-pesan{id}', 'App\Http\Controllers\PesanController@delete')->name('delete-pesan');
 });

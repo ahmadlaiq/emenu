@@ -24,46 +24,33 @@
               <table class="table table-striped table-md">
                 <tbody><tr>
                   <th>#</th>
-                  <th>Name</th>
-                  <th>Created At</th>
-                  <th>Status</th>
+                  <th>Nama</th>
+                  <th>No Meja</th>
+                  <th>Jumlah Orang</th>
+                  <th>Pesanan</th>
                   <th>Action</th>
                 </tr>
+                @foreach ($pesan as $data)
                 <tr>
-                  <td>1</td>
-                  <td>Irwansyah Saputra</td>
-                  <td>2017-01-09</td>
-                  <td><div class="badge badge-success">Active</div></td>
-                  <td><a href="#" class="btn btn-secondary">Detail</a></td>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $data->nama }}</td>
+                  <td>{{ $data->nomeja }}</td>
+                  <td>{{ $data->orang }}</td>
+                  <td><p>{{ $data->pesanan }}</p></td>
+                  <td>
+                    <form action="{{ route('selesai', $data->id)}}" method="POST">
+                      @csrf
+                      @method('put')
+                      <div class="form-group">
+                      <input type="hidden"  name="status" value="2">
+                      </div>
+                      <button class="btn btn-success" type="submit">
+                        Selesai
+                      </button>
+                    </form>
+                  </td>
                 </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Hasan Basri</td>
-                  <td>2017-01-09</td>
-                  <td><div class="badge badge-success">Active</div></td>
-                  <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td>Kusnadi</td>
-                  <td>2017-01-11</td>
-                  <td><div class="badge badge-danger">Not Active</div></td>
-                  <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                </tr>
-                <tr>
-                  <td>4</td>
-                  <td>Rizal Fakhri</td>
-                  <td>2017-01-11</td>
-                  <td><div class="badge badge-success">Active</div></td>
-                  <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                </tr>
-                <tr>
-                  <td>5</td>
-                  <td>Isnap Kiswandi</td>
-                  <td>2017-01-17</td>
-                  <td><div class="badge badge-success">Active</div></td>
-                  <td><a href="#" class="btn btn-secondary">Detail</a></td>
-                </tr>
+                @endforeach
               </tbody></table>
             </div>
           </div>
